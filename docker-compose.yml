@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  api:
+    build:
+      context: api
+    ports:
+      - "${APP_PORT:-80}:8080"
+    volumes:
+      - './api:/app'
+    env_file:
+      - api/.env
+    restart: always
+  api-air:
+    image: cosmtrek/air
+    # working_dir value has to be the same of mapped volume
+    working_dir: /app
+    ports:
+      - 3000:3000
+    environment:
+      - PORT=3000
+    env_file:
+      - api/.env
+    volumes:
+      - ./api:/app
+
