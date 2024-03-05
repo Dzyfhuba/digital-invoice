@@ -13,14 +13,20 @@ services:
     restart: always
   api-air:
     image: cosmtrek/air
-    # working_dir value has to be the same of mapped volume
     working_dir: /app
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
       - PORT=3000
     env_file:
       - api/.env
     volumes:
       - ./api:/app
-
+  swagger:
+    image: swaggerapi/swagger-ui
+    ports:
+      - 3030:8080
+    volumes:
+      - ./api/doc:/usr/share/nginx/html/doc
+    environment:
+      - API_URL=doc/openapi.yaml

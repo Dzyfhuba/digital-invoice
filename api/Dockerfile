@@ -15,12 +15,15 @@ WORKDIR /api/
 # Install go dependencies
 RUN go get github.com/gorilla/mux && \
   go get github.com/gorilla/handlers && \
-  go get github.com/lib/pq && \
   go get github.com/joho/godotenv && \
   go get github.com/jinzhu/gorm && \
   go get github.com/go-goracle/goracle && \
   go get github.com/cosmtrek/air@latest && \
-  go get github.com/gin-gonic/gin
+  go get github.com/gin-gonic/gin && \
+  go get github.com/gin-contrib/cors && \
+  go get firebase.google.com/go && \
+  go get firebase.google.com/go/v4 && \
+  go get golang.org/x/crypto/bcrypt
 
 #build the go app
 RUN GOOS=linux GOARCH=amd64 go build -o ./api ./main.go
